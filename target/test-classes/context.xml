@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       		http://www.springframework.org/schema/beans/spring-beans.xsd
+       		http://www.springframework.org/schema/context
+           	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           	http://www.springframework.org/schema/jdbc
+            http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.starkhorn"></context:component-scan>
+	
+	<util:properties id="purchaseStatusMap" location="classpath:purchase.status.properties">
+	</util:properties>
+	
+	<util:properties id="redeemStatusMap" location="classpath:redeem.status.properties">
+	</util:properties>
+	
+	<bean id="awdStatusFactory" class="com.starkhorn.AwdStatusFactory">
+		<property name="workTypeToStatusMapping">
+			<util:map>
+				<entry key="PURCHASE" value-ref="purchaseStatusMap"></entry>
+				<entry key="REDEEM" value-ref="redeemStatusMap"></entry>
+			</util:map>
+		</property>
+	</bean>
+	
+</beans>
