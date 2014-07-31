@@ -13,6 +13,14 @@ public class Application {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		
+		MyEnvironment env = context.getBean(MyEnvironment.class);
+		System.out.println("username = " + env.getUsername());
+		System.out.println("password = " + env.getPassword());
+		
+	}
+
+	private static void testAsync(ApplicationContext context) throws InterruptedException, ExecutionException {
 		AwdService service = context.getBean(AwdService.class);
 
 		long start = System.currentTimeMillis();

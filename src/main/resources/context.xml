@@ -11,10 +11,21 @@
             http://www.springframework.org/schema/task
     		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
-<!-- 	<context:annotation-config /> -->
-<!-- 	<context:component-scan base-package="com.starkhorn"></context:component-scan> -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.starkhorn"></context:component-scan>
 	
 	<bean id="awdService" class="com.starkhorn.AwdService" />
 	<task:annotation-driven />
+	
+<!-- 	<context:property-placeholder location="classpath:${runtime.environment}.properties"/> -->
+	<bean id="test" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:${runtime.environment}.properties</value>
+			</list>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true"></property>
+		<property name="ignoreResourceNotFound" value="true"></property>
+	</bean>
 
 </beans>
